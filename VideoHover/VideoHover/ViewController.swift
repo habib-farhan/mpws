@@ -10,7 +10,7 @@ import UIKit
 import AVKit
 import AVFoundation
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, VideoHoverDelegate {
     
     @IBAction func annotationSwitchChanged(sender: AnyObject) {
         let sw = sender as! UISwitch
@@ -29,6 +29,28 @@ class ViewController: UIViewController {
     
     @IBAction func resetVideo(sender: AnyObject) {
         videoPlayer?.player.seekToTime(kCMTimeZero)
+    }
+    
+    func pauseVideo() {
+        videoPlayer!.player.rate = 0.0
+    }
+    
+    func playVideo() {
+        videoPlayer!.player.rate = 1.0
+    }
+    
+    func jumpToNextFrame() {
+        videoPlayer!.player.currentItem?.stepByCount(1)
+    }
+    
+    func currentTime() -> (Int64, Float) {
+        let player = videoPlayer!.player
+        
+        let hundredthseconds = (player.currentTime().value  * 100) / (Int64)(player.currentTime().timescale)
+        let hundredth = (Float(hundredthseconds) / 100.0) % 1
+        let seconds = (player.currentTime().value) / (Int64)(player.currentTime().timescale)
+        
+        return (seconds, hundredth)
     }
     
     @IBAction func playPause(sender: AnyObject) {
@@ -56,9 +78,10 @@ class ViewController: UIViewController {
         
         for sv in self.view.subviews {
             if let vh = sv as? VideoHover {
-                vh.showOverlays()
                 hover = vh
                 hover?.setPlaying(true)
+                hover?.delegate = self
+                vh.showOverlays()
             }
         }
         for sv in self.view.subviews {
@@ -68,7 +91,7 @@ class ViewController: UIViewController {
             }
         }
         
-        hover?.addHint(VideoHint(startSec: 2, startHundredth: 0, endSec: 10, endHundredth: 0, x: 150, y: 200, radius: 50, hint: "Boateng \nPA%\t89.2\nShots\t1 "))
+        hover?.addHint(VideoHint(startSec: 0, startHundredth: 0, endSec: 10, endHundredth: 0, x: 150, y: 200, radius: 50, hint: "Boateng \nPA%\t89.2\nShots\t1 "))
         
         hover?.addHint(VideoHint(startSec: 12, startHundredth: 0, endSec: 20, endHundredth: 0, x: 0, y: 0, radius: 50, hint: "Boateng \nPA%\t89.2\nShots\t1 "))
         hover?.addHint(VideoHint(startSec: 12, startHundredth: 0, endSec: 20, endHundredth: 0, x: 850, y: 500, radius: 50, hint: "Boateng \nPA%\t89.2\nShots\t1 "))

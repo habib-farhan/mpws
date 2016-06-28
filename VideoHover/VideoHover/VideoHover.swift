@@ -36,18 +36,46 @@ class VideoHint {
     }
 }
 
+
+private struct VideoHoverTime : Hashable {
+    var seconds : Int64
+    var hundredth : Float
+    
+    var hashValue : Int {
+        get {
+            let (a,_) = (seconds, hundredth)
+            return a.hashValue
+        }
+    }
+}
+
+private func == (lhs: VideoHoverTime, rhs: VideoHoverTime) -> Bool {
+    let floatsEq = Int(round(lhs.hundredth*10)) == Int(round(rhs.hundredth*10))
+    return lhs.seconds == rhs.seconds && floatsEq
+}
+
 private class VideoBubble {
     var hint : VideoHint
     var shape : CAShapeLayer
     var visible : Bool
     var text : CATextLayer?
     
+    var movement : [VideoHoverTime : CGPoint?]
+    
     init (hint: VideoHint, shape: CAShapeLayer, visible: Bool) {
         self.hint = hint
         self.shape = shape
         self.visible = visible
         self.text = nil
+        self.movement = [:]
     }
+}
+
+protocol VideoHoverDelegate {
+    func pauseVideo()
+    func playVideo()
+    func jumpToNextFrame()
+    func currentTime() -> (Int64, Float)
 }
 
 class VideoHover : UIView {
@@ -58,6 +86,16 @@ class VideoHover : UIView {
     private var isPlaying : Bool = false
     private var movingBubble : VideoBubble? = nil
     private var showingOverlays = false
+    private var editedBubble : VideoBubble?
+    private var editedBubbleColor : UIColor?
+    private var timer : NSTimer?
+    private var currentTime : VideoHoverTime {
+        get {
+            return VideoHoverTime(seconds: seconds, hundredth: hundredth)
+        }
+    }
+    
+    var delegate : VideoHoverDelegate?
     
     var hints : [VideoHint] = []
     private var bubbles : [VideoBubble] = []
@@ -134,13 +172,44 @@ class VideoHover : UIView {
             //Show bubble
             self.layer.addSublayer(bubbles[i].shape)
             bubbles[i].visible = true
+            
+            
+        }
+    }
+    
+    @objc private func updateTime() {
+        var seconds : Int64 = 0
+        var hundredth : Float = 0
+        (seconds, hundredth) = delegate!.currentTime()
+        
+        //print("seconds \(seconds), hundredth \(hundredth)")
+        
+        var updateLayers = false
+        if showingOverlays && seconds != self.seconds || hundredth != self.hundredth {
+            updateLayers = true
+        }
+        self.seconds = seconds
+        self.hundredth = hundredth
+        if updateLayers {
+            showOverlays()
         }
     }
     
     func showOverlays() {
+        if (delegate == nil) {
+            print("You forgot to set a delegate for VideoHover. Cannot start showing hints.")
+            return
+        }
+        
         showingOverlays = true
+        timer = NSTimer.scheduledTimerWithTimeInterval(0.01, target: self, selector: #selector(VideoHover.updateTime), userInfo: nil, repeats: true)
         for i in bubbles.indices {
             if bubbleBelongsToCurrentTime(bubbles[i]) {
+                if bubbles[i].movement[currentTime] != nil {
+                    let newPos = bubbles[i].movement[currentTime]!
+                    bubbles[i].shape.position = CGPoint(x: newPos!.x, y: newPos!.y)
+                    bubbles[i].shape.removeAnimationForKey("position")
+                }
                 showBubbleAtIndex(i)
             } else {
                 hideBubbleAtIndex(i)
@@ -151,6 +220,8 @@ class VideoHover : UIView {
     func hideOverlays() {
         self.layer.sublayers?.removeAll()
         showingOverlays = false
+        timer?.invalidate()
+        timer = nil
     }
     
     func createCircle(radius: CGFloat, x: Int, y: Int, color: UIColor) -> CAShapeLayer {
@@ -172,20 +243,21 @@ class VideoHover : UIView {
         return circleLayer
     }
     
-    func setTime (seconds: Int64, hundredth: Float) {
-        var updateLayers = false
-        if showingOverlays && seconds != self.seconds && hundredth != self.hundredth {
-            updateLayers = true
-        }
-        self.seconds = seconds
-        self.hundredth = hundredth
-        if updateLayers {
-            showOverlays()
-        }
-    }
-    
     func setEditing(isEditing: Bool) {
         self.isEditing = isEditing
+        delegate?.pauseVideo()
+        
+        if isEditing == false {
+            if editedBubble != nil {
+                editedBubble?.hint.endSec = seconds
+                editedBubble?.hint.endHundredth = hundredth
+                editedBubble?.hint.color = editedBubbleColor!
+                editedBubbleColor = nil
+                editedBubble = nil
+            }
+            delegate?.playVideo()
+            
+        }
     }
     
     func setPlaying(isPlaying: Bool) {
@@ -197,8 +269,8 @@ class VideoHover : UIView {
     private func bubbleForTouch(touch: UITouch) -> VideoBubble? {
         for bubble in bubbles {
             var touchLocation = touch.locationInView(self)
-            touchLocation.x -= CGFloat(bubble.hint.x)
-            touchLocation.y -= CGFloat(bubble.hint.y)
+            touchLocation.x -= bubble.shape.position.x
+            touchLocation.y -= bubble.shape.position.y
             if CGPathContainsPoint(bubble.shape.path, nil, touchLocation, true) &&
                 bubble.visible {
                 movingBubble = bubble
@@ -212,6 +284,9 @@ class VideoHover : UIView {
         //Top left corner
         var x = bubble.hint.x
         var y = bubble.hint.y
+        
+        x = Int(bubble.shape.position.x)
+        y = Int(bubble.shape.position.y)
         
         let size = bubble.hint.radius*2
         
@@ -268,15 +343,48 @@ class VideoHover : UIView {
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
 
         for touch in touches {
+                
+            //Editing? Adjust position of bubble
+            if let movingBubble = editedBubble where self.isEditing {
+                
+                var touchLocation = touch.locationInView(self)
+                touchLocation.x -= CGFloat(movingBubble.hint.radius)
+                touchLocation.y -= CGFloat(movingBubble.hint.radius)
+                
+                //Stay within bounds
+                let radius : CGFloat = CGFloat(movingBubble.hint.radius)
+                if touchLocation.x+radius >= 0 && touchLocation.x+radius <= self.frame.width {
+                    movingBubble.hint.x = Int(touchLocation.x)
+                }
+                if touchLocation.y+radius >= 0 && touchLocation.y+radius <= self.frame.height {
+                    movingBubble.hint.y = Int(touchLocation.y)
+                }
+                
+                //Adjust position
+                movingBubble.shape.position = CGPoint(x: movingBubble.hint.x, y: movingBubble.hint.y)
+                //These animations just make everything sluggish - therefore remove them
+                movingBubble.shape.removeAnimationForKey("position")
+                
+                movingBubble.movement[currentTime] = CGPoint(x: movingBubble.hint.x, y: movingBubble.hint.y)
+                
+                delegate?.jumpToNextFrame()
+            }
+            
             
             if let bubble = bubbleForTouch(touch) {
-                print("Touch begin in bubble")
+                //print("Touch begin in bubble")
                 if !isEditing {
                     showText(bubble)
+                } else if editedBubble == nil{
+                    editedBubble = bubble
+                    editedBubbleColor = editedBubble?.hint.color
+                    editedBubble?.hint.startSec = seconds
+                    editedBubble?.hint.startHundredth = hundredth
+                    editedBubble?.shape.fillColor = UIColor(red: 0.8, green: 0, blue: 0, alpha: 0.5).CGColor
                 }
                 bubbleForTouch[touch] = bubble
             } else {
-                print("Touch begin")
+                //print("Touch begin")
             }
         }
         
@@ -314,6 +422,7 @@ class VideoHover : UIView {
             
             //Editing? Adjust position of bubble
             if let movingBubble = currentBubble where self.isEditing {
+                
                 var touchLocation = touch.locationInView(self)
                 touchLocation.x -= CGFloat(movingBubble.hint.radius)
                 touchLocation.y -= CGFloat(movingBubble.hint.radius)
@@ -332,7 +441,10 @@ class VideoHover : UIView {
                 //These animations just make everything sluggish - therefore remove them
                 movingBubble.shape.removeAnimationForKey("position")
                 
+                movingBubble.movement[currentTime] = CGPoint(x: movingBubble.hint.x, y: movingBubble.hint.y)
             }
+            
+            
             
         }
     }
@@ -344,6 +456,8 @@ class VideoHover : UIView {
             }
             bubbleForTouch[touch] = nil
         }
+        
+        
         
         
     }
