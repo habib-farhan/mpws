@@ -43,8 +43,7 @@ private struct VideoHoverTime : Hashable {
     
     var hashValue : Int {
         get {
-            let (a,_) = (seconds, hundredth)
-            return a.hashValue
+            return seconds.hashValue
         }
     }
 }
@@ -97,7 +96,7 @@ class VideoHover : UIView {
     
     var delegate : VideoHoverDelegate?
     
-    var hints : [VideoHint] = []
+    private var hints : [VideoHint] = []
     private var bubbles : [VideoBubble] = []
     private var bubbleForTouch = [UITouch:VideoBubble]()
     
@@ -191,7 +190,18 @@ class VideoHover : UIView {
         self.seconds = seconds
         self.hundredth = hundredth
         if updateLayers {
-            showOverlays()
+            for i in bubbles.indices {
+                if bubbleBelongsToCurrentTime(bubbles[i]) {
+                    if bubbles[i].movement[currentTime] != nil {
+                        let newPos = bubbles[i].movement[currentTime]!
+                        bubbles[i].shape.position = CGPoint(x: newPos!.x, y: newPos!.y)
+                        bubbles[i].shape.removeAnimationForKey("position")
+                    }
+                    showBubbleAtIndex(i)
+                } else {
+                    hideBubbleAtIndex(i)
+                }
+            }
         }
     }
     
@@ -224,7 +234,7 @@ class VideoHover : UIView {
         timer = nil
     }
     
-    func createCircle(radius: CGFloat, x: Int, y: Int, color: UIColor) -> CAShapeLayer {
+    private func createCircle(radius: CGFloat, x: Int, y: Int, color: UIColor) -> CAShapeLayer {
         var circleLayer: CAShapeLayer!
         if circleLayer == nil {
             circleLayer = CAShapeLayer()
@@ -236,7 +246,7 @@ class VideoHover : UIView {
             var b : CGFloat = 0
             var a : CGFloat = 0
             color.getRed(&r, green: &g, blue: &b, alpha: &a)
-            circleLayer.fillColor = UIColor(red: r, green: g, blue: b, alpha: 0.5).CGColor
+            circleLayer.fillColor = UIColor(red: r, green: g, blue: b, alpha: 0.3).CGColor
             circleLayer.lineWidth = 2.0
             circleLayer.strokeColor = UIColor(red: r, green: g, blue: b, alpha: 1.0).CGColor
         }
@@ -252,6 +262,14 @@ class VideoHover : UIView {
                 editedBubble?.hint.endSec = seconds
                 editedBubble?.hint.endHundredth = hundredth
                 editedBubble?.hint.color = editedBubbleColor!
+                
+                var r : CGFloat = 0
+                var g : CGFloat = 0
+                var b : CGFloat = 0
+                var a : CGFloat = 0
+                editedBubbleColor?.getRed(&r, green: &g, blue: &b, alpha: &a)
+                
+                editedBubble!.shape.fillColor = UIColor(red: r, green: g, blue: b, alpha: 0.3).CGColor
                 editedBubbleColor = nil
                 editedBubble = nil
             }
@@ -374,7 +392,9 @@ class VideoHover : UIView {
             if let bubble = bubbleForTouch(touch) {
                 //print("Touch begin in bubble")
                 if !isEditing {
-                    showText(bubble)
+                    if bubble.text == nil {
+                        showText(bubble)
+                    }
                 } else if editedBubble == nil{
                     editedBubble = bubble
                     editedBubbleColor = editedBubble?.hint.color
@@ -453,6 +473,7 @@ class VideoHover : UIView {
         for touch in touches {
             if let ct = bubbleForTouch[touch]?.text {
                 ct.removeFromSuperlayer()
+                bubbleForTouch[touch]?.text = nil
             }
             bubbleForTouch[touch] = nil
         }

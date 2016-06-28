@@ -45,7 +45,9 @@ class ViewController: UIViewController, VideoHoverDelegate, CHBDelegate {
     
     func updateTime(time: CGFloat) {
         let videoLength = CMTimeGetSeconds((videoPlayer?.player.currentItem!.asset.duration)!)
-        videoPlayer?.player.seekToTime(CMTimeMake((Int64)(time*CGFloat(videoLength*1000)),1000))
+        print("\(Int64(time*CGFloat(videoLength)))")
+        //videoPlayer?.player.seekToTime(CMTimeMake(Int64(time*CGFloat(videoLength)),1))
+        videoPlayer?.player.seekToTime(CMTimeMakeWithSeconds(Double(time)*videoLength, 1))
     }
     
     func currentTime() -> (Int64, Float) {

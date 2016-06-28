@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		117286351D22D0A100669D2C /* CHB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117286341D22D0A100669D2C /* CHB.swift */; };
-		9B0BF0211D1C786700EF4901 /* Untitled.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 9B0BF0201D1C786700EF4901 /* Untitled.mp4 */; };
+		9B07350A1D22F25D005C28F7 /* Untitled.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 9B0735091D22F25D005C28F7 /* Untitled.mp4 */; };
 		9B3B69BB1D1C1E8800DF6ABB /* VideoPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B3B69BA1D1C1E8800DF6ABB /* VideoPlayer.swift */; };
 		9B50B0A81D1ACE1900E303B5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B50B0A71D1ACE1900E303B5 /* AppDelegate.swift */; };
 		9B50B0AA1D1ACE1900E303B5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B50B0A91D1ACE1900E303B5 /* ViewController.swift */; };
@@ -20,7 +20,7 @@
 
 /* Begin PBXFileReference section */
 		117286341D22D0A100669D2C /* CHB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CHB.swift; sourceTree = "<group>"; };
-		9B0BF0201D1C786700EF4901 /* Untitled.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = Untitled.mp4; sourceTree = "<group>"; };
+		9B0735091D22F25D005C28F7 /* Untitled.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = Untitled.mp4; sourceTree = "<group>"; };
 		9B3B69BA1D1C1E8800DF6ABB /* VideoPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoPlayer.swift; sourceTree = "<group>"; };
 		9B50B0A41D1ACE1800E303B5 /* VideoHover.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VideoHover.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B50B0A71D1ACE1900E303B5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -66,7 +66,7 @@
 				9B75F7DA1D1AD00C00D46B5C /* VideoHover.swift */,
 				9B50B0A91D1ACE1900E303B5 /* ViewController.swift */,
 				9B3B69BA1D1C1E8800DF6ABB /* VideoPlayer.swift */,
-				9B0BF0201D1C786700EF4901 /* Untitled.mp4 */,
+				9B0735091D22F25D005C28F7 /* Untitled.mp4 */,
 				9B50B0AB1D1ACE1900E303B5 /* Main.storyboard */,
 				9B50B0AE1D1ACE1900E303B5 /* Assets.xcassets */,
 				9B50B0B01D1ACE1900E303B5 /* LaunchScreen.storyboard */,
@@ -136,7 +136,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9B0BF0211D1C786700EF4901 /* Untitled.mp4 in Resources */,
+				9B07350A1D22F25D005C28F7 /* Untitled.mp4 in Resources */,
 				9B50B0B21D1ACE1900E303B5 /* LaunchScreen.storyboard in Resources */,
 				9B50B0AF1D1ACE1900E303B5 /* Assets.xcassets in Resources */,
 				9B50B0AD1D1ACE1900E303B5 /* Main.storyboard in Resources */,
