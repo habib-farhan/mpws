@@ -10,7 +10,7 @@ import UIKit
 import AVKit
 import AVFoundation
 
-class ViewController: UIViewController, VideoHoverDelegate {
+class ViewController: UIViewController, VideoHoverDelegate, CHBDelegate {
     
     @IBAction func annotationSwitchChanged(sender: AnyObject) {
         let sw = sender as! UISwitch
@@ -43,6 +43,11 @@ class ViewController: UIViewController, VideoHoverDelegate {
         videoPlayer!.player.currentItem?.stepByCount(1)
     }
     
+    func updateTime(time: CGFloat) {
+        let videoLength = CMTimeGetSeconds((videoPlayer?.player.currentItem!.asset.duration)!)
+        videoPlayer?.player.seekToTime(CMTimeMake((Int64)(time*CGFloat(videoLength*1000)),1000))
+    }
+    
     func currentTime() -> (Int64, Float) {
         let player = videoPlayer!.player
         
@@ -68,6 +73,7 @@ class ViewController: UIViewController, VideoHoverDelegate {
     
     
     var hover : VideoHover? = nil
+    var chb: CHB? = nil
     var videoPlayer : VideoPlayer? = nil
     
     override func viewDidLoad() {
@@ -84,9 +90,18 @@ class ViewController: UIViewController, VideoHoverDelegate {
                 vh.showOverlays()
             }
         }
+        
+        for sv in self.view.subviews {
+            if let vh = sv as? CHB {
+                chb = vh
+                chb!.delegate = self
+            }
+        }
+        
         for sv in self.view.subviews {
             if let vp = sv as? VideoPlayer {
                 vp.hover = hover!
+                vp.chb = chb!
                 videoPlayer = vp
             }
         }

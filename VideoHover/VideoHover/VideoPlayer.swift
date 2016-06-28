@@ -15,6 +15,8 @@ class VideoPlayer : UIView {
     var timer : NSTimer = NSTimer()
     var player : AVPlayer = AVPlayer()
     var hover : VideoHover = VideoHover()
+    var chb = CHB()
+    var playing = false
     
     override func drawRect(rect: CGRect) {
         if firstAppear {
@@ -47,8 +49,23 @@ class VideoPlayer : UIView {
         playerLayer.frame = self.bounds
         
         self.layer.addSublayer(playerLayer)
+        playing = true
         player.play()
+        timer = NSTimer.scheduledTimerWithTimeInterval(0.03, target: self, selector: #selector(VideoPlayer.updateTime), userInfo: nil, repeats: true)
     }
+    
+    @objc private func updateTime () {
+        let seconds: CGFloat = CGFloat(((player.currentTime().value)*100) / (Int64)(player.currentTime().timescale))/100
+        let videoLength = CMTimeGetSeconds(player.currentItem!.asset.duration)
+        if(videoLength != 0 && !chb.touching){
+            chb.update(seconds/CGFloat(videoLength))
+        }
+        if(chb.currentPosition==1){
+            playing=false
+        }
+        
+    }
+    
 }
 
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15A279b" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -77,6 +77,10 @@
                                     <action selector="resetVideo:" destination="BYZ-38-t0r" eventType="touchUpInside" id="pdL-7k-DkB"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="o7x-lc-S1k" customClass="CHB" customModule="VideoHover" customModuleProvider="target">
+                                <rect key="frame" x="20" y="494" width="560" height="98"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -86,12 +90,16 @@
                             <constraint firstAttribute="trailingMargin" secondItem="cFw-uy-lgs" secondAttribute="trailing" constant="6" id="6l3-cI-0Sm"/>
                             <constraint firstItem="cFw-uy-lgs" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="DO5-z8-l9N"/>
                             <constraint firstAttribute="trailingMargin" secondItem="TuE-WW-ZIw" secondAttribute="trailing" constant="24" id="Dlg-Jq-LEE"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="o7x-lc-S1k" secondAttribute="bottom" constant="8" id="G8u-go-Kka"/>
                             <constraint firstItem="cFw-uy-lgs" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="HGn-fE-Ahv"/>
+                            <constraint firstItem="o7x-lc-S1k" firstAttribute="top" secondItem="Oo7-xT-x7p" secondAttribute="bottom" constant="8" id="JWi-qh-Lfs"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="o7x-lc-S1k" secondAttribute="leading" id="JXJ-Ab-UNn"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Hol-Ae-RCu" secondAttribute="bottom" constant="114" id="MVx-uX-hyz"/>
                             <constraint firstItem="v0h-a6-kGn" firstAttribute="trailing" secondItem="cFw-uy-lgs" secondAttribute="trailing" id="SLw-Ag-yWG"/>
                             <constraint firstItem="Oo7-xT-x7p" firstAttribute="centerX" secondItem="uay-3g-NPK" secondAttribute="centerX" id="U1C-3Q-aAa"/>
                             <constraint firstItem="Oo7-xT-x7p" firstAttribute="top" secondItem="uay-3g-NPK" secondAttribute="bottom" constant="16" id="ZV2-Ih-m1f"/>
                             <constraint firstItem="v0h-a6-kGn" firstAttribute="leading" secondItem="cFw-uy-lgs" secondAttribute="leading" id="aU6-FW-IK2"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="o7x-lc-S1k" secondAttribute="trailing" id="cjo-DA-lKJ"/>
                             <constraint firstItem="IMD-SV-M0S" firstAttribute="top" secondItem="TuE-WW-ZIw" secondAttribute="bottom" constant="16" id="k8c-EL-Jfo"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Oo7-xT-x7p" secondAttribute="bottom" constant="114" id="kkb-Kj-jTT"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="IMD-SV-M0S" secondAttribute="bottom" constant="114" id="msC-bb-mNv"/>
@@ -101,6 +109,7 @@
                             <constraint firstItem="IXr-dI-bSi" firstAttribute="leading" secondItem="Hol-Ae-RCu" secondAttribute="trailing" constant="35" id="sEf-ga-LMN"/>
                             <constraint firstAttribute="trailingMargin" secondItem="IMD-SV-M0S" secondAttribute="trailing" id="vKa-SH-8B7"/>
                             <constraint firstItem="Oo7-xT-x7p" firstAttribute="leading" secondItem="IXr-dI-bSi" secondAttribute="trailing" constant="66" id="xVT-5L-IIO"/>
+                            <constraint firstItem="Hol-Ae-RCu" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="11" id="zdn-Ho-hR9"/>
                         </constraints>
                     </view>
                 </viewController>
