@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		117286351D22D0A100669D2C /* CHB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117286341D22D0A100669D2C /* CHB.swift */; };
+		885079CB1D23F69E00EE3871 /* GestureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885079C61D23F69E00EE3871 /* GestureView.swift */; };
+		885079CC1D23F69E00EE3871 /* GLGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 885079C81D23F69E00EE3871 /* GLGestureRecognizer.m */; };
+		885079CD1D23F69E00EE3871 /* GLGestureRecognizer+JSONTemplates.m in Sources */ = {isa = PBXBuildFile; fileRef = 885079CA1D23F69E00EE3871 /* GLGestureRecognizer+JSONTemplates.m */; };
 		9B07350A1D22F25D005C28F7 /* Untitled.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 9B0735091D22F25D005C28F7 /* Untitled.mp4 */; };
 		9B3B69BB1D1C1E8800DF6ABB /* VideoPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B3B69BA1D1C1E8800DF6ABB /* VideoPlayer.swift */; };
 		9B50B0A81D1ACE1900E303B5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B50B0A71D1ACE1900E303B5 /* AppDelegate.swift */; };
@@ -20,6 +23,12 @@
 
 /* Begin PBXFileReference section */
 		117286341D22D0A100669D2C /* CHB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CHB.swift; sourceTree = "<group>"; };
+		885079C51D23F69E00EE3871 /* VideoHover-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "VideoHover-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
+		885079C61D23F69E00EE3871 /* GestureView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GestureView.swift; path = ../GestureView.swift; sourceTree = "<group>"; };
+		885079C71D23F69E00EE3871 /* GLGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GLGestureRecognizer.h; path = ../GLGestureRecognizer.h; sourceTree = "<group>"; };
+		885079C81D23F69E00EE3871 /* GLGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GLGestureRecognizer.m; path = ../GLGestureRecognizer.m; sourceTree = "<group>"; };
+		885079C91D23F69E00EE3871 /* GLGestureRecognizer+JSONTemplates.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "GLGestureRecognizer+JSONTemplates.h"; path = "../GLGestureRecognizer+JSONTemplates.h"; sourceTree = "<group>"; };
+		885079CA1D23F69E00EE3871 /* GLGestureRecognizer+JSONTemplates.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "GLGestureRecognizer+JSONTemplates.m"; path = "../GLGestureRecognizer+JSONTemplates.m"; sourceTree = "<group>"; };
 		9B0735091D22F25D005C28F7 /* Untitled.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = Untitled.mp4; sourceTree = "<group>"; };
 		9B3B69BA1D1C1E8800DF6ABB /* VideoPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoPlayer.swift; sourceTree = "<group>"; };
 		9B50B0A41D1ACE1800E303B5 /* VideoHover.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VideoHover.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -62,6 +71,12 @@
 		9B50B0A61D1ACE1900E303B5 /* VideoHover */ = {
 			isa = PBXGroup;
 			children = (
+				885079C61D23F69E00EE3871 /* GestureView.swift */,
+				885079C71D23F69E00EE3871 /* GLGestureRecognizer.h */,
+				885079C81D23F69E00EE3871 /* GLGestureRecognizer.m */,
+				885079C91D23F69E00EE3871 /* GLGestureRecognizer+JSONTemplates.h */,
+				885079CA1D23F69E00EE3871 /* GLGestureRecognizer+JSONTemplates.m */,
+				885079C51D23F69E00EE3871 /* VideoHover-Bridging-Header.h */,
 				9B50B0A71D1ACE1900E303B5 /* AppDelegate.swift */,
 				9B75F7DA1D1AD00C00D46B5C /* VideoHover.swift */,
 				9B50B0A91D1ACE1900E303B5 /* ViewController.swift */,
@@ -108,7 +123,7 @@
 				TargetAttributes = {
 					9B50B0A31D1ACE1800E303B5 = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = F5UEGZQZC7;
+						DevelopmentTeam = E93K3CF64F;
 						DevelopmentTeamName = "Jörg Kirchhof (Personal Team)";
 					};
 				};
@@ -152,8 +167,11 @@
 			files = (
 				9B3B69BB1D1C1E8800DF6ABB /* VideoPlayer.swift in Sources */,
 				9B50B0AA1D1ACE1900E303B5 /* ViewController.swift in Sources */,
+				885079CB1D23F69E00EE3871 /* GestureView.swift in Sources */,
 				117286351D22D0A100669D2C /* CHB.swift in Sources */,
+				885079CD1D23F69E00EE3871 /* GLGestureRecognizer+JSONTemplates.m in Sources */,
 				9B50B0A81D1ACE1900E303B5 /* AppDelegate.swift in Sources */,
+				885079CC1D23F69E00EE3871 /* GLGestureRecognizer.m in Sources */,
 				9B75F7DB1D1AD00C00D46B5C /* VideoHover.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -269,14 +287,17 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = VideoHover/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = de.rwth.hci.VideoHover;
+				PRODUCT_BUNDLE_IDENTIFIER = de.on.VideoHover;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "VideoHover-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -284,14 +305,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = VideoHover/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = de.rwth.hci.VideoHover;
+				PRODUCT_BUNDLE_IDENTIFIER = de.on.VideoHover;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "VideoHover-Bridging-Header.h";
 			};
 			name = Release;
 		};

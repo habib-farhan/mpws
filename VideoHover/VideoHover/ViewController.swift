@@ -10,7 +10,10 @@ import UIKit
 import AVKit
 import AVFoundation
 
-class ViewController: UIViewController, VideoHoverDelegate, CHBDelegate {
+class ViewController: UIViewController, VideoHoverDelegate, CHBDelegate, GestureViewDelegate {
+    
+    @IBOutlet weak var gestureAdd: UIButton!
+    @IBOutlet weak var gestureRemove: UIButton!
     
     @IBAction func annotationSwitchChanged(sender: AnyObject) {
         let sw = sender as! UISwitch
@@ -30,6 +33,33 @@ class ViewController: UIViewController, VideoHoverDelegate, CHBDelegate {
     @IBAction func resetVideo(sender: AnyObject) {
         videoPlayer?.player.seekToTime(kCMTimeZero)
     }
+    
+    @IBAction func addGesture(sender: AnyObject){
+        pauseVideo()
+        //Get relative time position to pass as key for gesture
+        let cmTime = CMTimeGetSeconds((videoPlayer?.player.currentTime())!)
+        let videoLength = CMTimeGetSeconds((videoPlayer?.player.currentItem!.asset.duration)!)
+        let floatTime = Float(cmTime / videoLength)
+        gestureView?.storingKey = NSString(format: "%f", floatTime) as String
+        
+        //Changes the mode of gestureView
+        gestureView?.mode = (gestureView?.mode != gestureView?.Add ? gestureView?.Add : gestureView?.Read)!
+    }
+    
+    @IBAction func removeGesture(sender: AnyObject){
+        pauseVideo()
+        
+        //Changes the mode of gestureView
+        gestureView?.mode = (gestureView?.mode != gestureView?.Remove ? gestureView?.Remove : gestureView?.Read)!
+    }
+    
+    @IBAction func showGestureView(sender: AnyObject){
+        let sw = sender as! UISwitch
+        gestureView?.hidden = !sw.on
+        gestureAdd.hidden = !sw.on
+        gestureRemove.hidden = !sw.on
+    }
+        
     
     func pauseVideo() {
         videoPlayer!.player.rate = 0.0
@@ -71,10 +101,27 @@ class ViewController: UIViewController, VideoHoverDelegate, CHBDelegate {
         }
     }
     
+    func gestureViewModeChangedTo(mode: Int) {
+        switch mode {
+        case (gestureView?.Add)!:
+            gestureAdd.setTitle("Cancel", forState: .Normal)
+            gestureRemove.setTitle("Remove", forState: .Normal)
+            break
+        case (gestureView?.Remove)!:
+            gestureAdd.setTitle("Add", forState: .Normal)
+            gestureRemove.setTitle("Cancel", forState: .Normal)
+            break
+        default:
+            gestureAdd.setTitle("Add", forState: .Normal)
+            gestureRemove.setTitle("Remove", forState: .Normal)
+        }
+    }
+    
     
     var hover : VideoHover? = nil
     var chb: CHB? = nil
     var videoPlayer : VideoPlayer? = nil
+    var gestureView : GestureView? = nil
     
     override func viewDidLoad() {
         
@@ -97,6 +144,14 @@ class ViewController: UIViewController, VideoHoverDelegate, CHBDelegate {
                 chb!.delegate = self
             }
         }
+        
+        for sv in self.view.subviews {
+            if let gv = sv as? GestureView {
+                gestureView = gv
+                gestureView!.delegate = self
+            }
+        }
+
         
         for sv in self.view.subviews {
             if let vp = sv as? VideoPlayer {
