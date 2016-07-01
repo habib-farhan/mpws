@@ -43,14 +43,22 @@ class ViewController: UIViewController, VideoHoverDelegate, CHBDelegate, Gesture
         gestureView?.storingKey = NSString(format: "%f", floatTime) as String
         
         //Changes the mode of gestureView
-        gestureView?.mode = (gestureView?.mode != gestureView?.Add ? gestureView?.Add : gestureView?.Read)!
+        if gestureView?.getMode() != gestureView?.Add {
+            gestureView?.addMode()
+        }else{
+            gestureView?.readMode()
+        }
     }
     
     @IBAction func removeGesture(sender: AnyObject){
         pauseVideo()
         
         //Changes the mode of gestureView
-        gestureView?.mode = (gestureView?.mode != gestureView?.Remove ? gestureView?.Remove : gestureView?.Read)!
+        if gestureView?.getMode() != gestureView?.Remove {
+            gestureView?.removeMode()
+        }else{
+            gestureView?.readMode()
+        }
     }
     
     @IBAction func showGestureView(sender: AnyObject){

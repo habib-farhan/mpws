@@ -6,6 +6,9 @@
 //  Copyright 2010 Giraffe Lab. All rights reserved.
 //
 //  Implements template loading from a .json file.
+//
+//  This version is a modification of the project from the authors named above!
+//  If you want to use a Gesture recognizer, look at https://github.com/preble/GLGestureRecognizer/tree/master
 
 #import <Foundation/Foundation.h>
 #import "GLGestureRecognizer.h"

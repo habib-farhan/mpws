@@ -6,7 +6,10 @@
 //  Largely an implementation of the $1 Unistroke Recognizer:
 //  http://depts.washington.edu/aimgroup/proj/dollar/
 //  Jacob O. Wobbrock, Andrew D. Wilson, Yang Li
-//  
+//
+//  This version is a modification of the project from the authors named above!
+//  If you want to use a gesture recognizer, look at https://github.com/preble/GLGestureRecognizer/tree/master
+//
 #import "GLGestureRecognizer.h"
 @import CoreGraphics;
 
@@ -21,7 +24,6 @@ float Distance(CGPoint p1, CGPoint p2);
 float PathDistance(CGPoint *pts1, CGPoint *pts2, int count);
 float DistanceAtAngle(CGPoint *samples, int samplePoints, CGPoint *template, float theta);
 float DistanceAtBestAngle(CGPoint *samples, int samplePoints, CGPoint *template);
-
 
 @interface GLGestureRecognizer () {
 	NSMutableArray *touchPoints;

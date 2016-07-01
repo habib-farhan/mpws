@@ -5,6 +5,9 @@
 //  Created by Adam Preble on 9/11/10.
 //  Copyright 2010 Giraffe Lab. All rights reserved.
 //
+//
+//  This version is a modification of the project from the authors named above!
+//  If you want to use a Gesture recognizer, look at https://github.com/preble/GLGestureRecognizer/tree/master
 
 #import "GLGestureRecognizer+JSONTemplates.h"
 @import CoreGraphics;

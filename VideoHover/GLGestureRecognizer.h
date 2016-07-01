@@ -3,6 +3,9 @@
 //
 //  Created by Adam Preble on 4/28/09.  adam@giraffelab.com
 //
+//
+//  This version is a modification of the project from the authors named above!
+//  If you want to use the gesture recognizer, look at https://github.com/preble/GLGestureRecognizer/tree/master
 
 #import <Foundation/Foundation.h>
 @import CoreGraphics;

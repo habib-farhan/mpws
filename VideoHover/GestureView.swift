@@ -126,7 +126,20 @@ class GestureView: UIView {
         path.lineWidth = 10
         path.stroke()
 
-    }    
+    }
+    
+    func addMode() {
+        mode = Int(recognizer.cAdd());
+    }
+    func removeMode() {
+        mode = Int(recognizer.cRemove());
+    }
+    func readMode() {
+        mode = Int(recognizer.cRemove());
+    }
+    func getMode () -> Int {
+        return mode
+    }
 }
 
 @objc protocol GestureViewDelegate {
