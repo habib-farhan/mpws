@@ -3,6 +3,7 @@
 //  VideoHover
 //
 //  Created by Jörg Christian Kirchhof on 22/06/16.
+//  Widget added by Farhan Habib on 3/07/16.
 //  Copyright © 2016 Media Computing Group of RWTH Aachen University. All rights reserved.
 //
 
@@ -12,7 +13,11 @@ import AVFoundation
 
 class ViewController: UIViewController, VideoHoverDelegate, CHBDelegate {
     
-    @IBAction func annotationSwitchChanged(sender: AnyObject) {
+    @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet weak var searchResult: UILabel!
+    
+    
+       @IBAction func annotationSwitchChanged(sender: AnyObject) {
         let sw = sender as! UISwitch
         if sw.on {
             hover?.showOverlays()
@@ -77,8 +82,67 @@ class ViewController: UIViewController, VideoHoverDelegate, CHBDelegate {
     var videoPlayer : VideoPlayer? = nil
     
     override func viewDidLoad() {
+        searchResult.text = " "
         
     }
+    
+    //searchbutton implementation to check for the contents
+    @IBAction func searchButton(sender: AnyObject) {
+        
+        
+        let search = searchBar.text
+        
+        //checking for the command in the search bar and mapping it to appropriate data and cideo frame
+        if(search == "Müller"){
+            searchResult.text = "Jumped to 0:05 "
+            videoPlayer?.player.seekToTime(CMTimeMakeWithSeconds(5, 5))
+            
+        }
+        if(search == "Boateng"){
+            searchResult.text = "Jumped to 0:22 "
+            videoPlayer?.player.seekToTime(CMTimeMakeWithSeconds(20, 10))
+            
+        }
+        if(search == "Schürrle"){
+            searchResult.text = "Jumped to 0:34 "
+            videoPlayer?.player.seekToTime(CMTimeMakeWithSeconds(29, 5))
+            
+        }
+        if(search == " Attack"){
+            searchResult.text = "Jumped to 0:34 "
+            videoPlayer?.player.seekToTime(CMTimeMakeWithSeconds(30, 5))
+            
+        }
+        if(search == "Close call"){
+            searchResult.text = "Jumped to 0:42 "
+            videoPlayer?.player.seekToTime(CMTimeMakeWithSeconds(40, 20))
+            
+        }
+        if(search == "Goal"){
+            searchResult.text = "No goal was scored :( "
+            //videoPlayer?.player.seekToTime(CMTimeMakeWithSeconds(5, 5))
+            
+        }
+        if(search == "Foul"){
+            searchResult.text = "No foul given "
+            
+            
+        }
+        if(search == "Hand"){
+            searchResult.text = "No hand ball "
+        
+            
+        }
+      else
+        {
+            //searchResult.text = "Sorry content not available "
+        }
+        
+        
+        
+    }
+    
+
     
     override func viewDidAppear(animated: Bool) {
         

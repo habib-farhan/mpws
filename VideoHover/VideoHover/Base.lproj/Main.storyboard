@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15A279b" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -24,6 +24,26 @@
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v0h-a6-kGn" customClass="VideoHover" customModule="VideoHover" customModuleProvider="target">
                                 <rect key="frame" x="20" y="20" width="554" height="390"/>
+                                <subviews>
+                                    <searchBar contentMode="redraw" fixedFrame="YES" placeholder="Search video content" translatesAutoresizingMaskIntoConstraints="NO" id="a5N-iK-Bq1">
+                                        <rect key="frame" x="-7" y="8" width="261" height="44"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </searchBar>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vpt-Dr-6WE">
+                                        <rect key="frame" x="254" y="8" width="40" height="44"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="23"/>
+                                        <state key="normal" title="GO"/>
+                                        <connections>
+                                            <action selector="searchButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="fhy-mD-wnz"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0qq-Gg-Fc0">
+                                        <rect key="frame" x="0.0" y="52" width="254" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.96071253270000001" green="0.96071253270000001" blue="0.96071253270000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
                             </view>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="TuE-WW-ZIw">
                                 <rect key="frame" x="507" y="418" width="51" height="31"/>
@@ -112,8 +132,21 @@
                             <constraint firstItem="Hol-Ae-RCu" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="11" id="zdn-Ho-hR9"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="searchBar" destination="a5N-iK-Bq1" id="6vK-IY-oPu"/>
+                        <outlet property="searchDisplayController" destination="ECB-Vr-9A3" id="ThK-NY-cws"/>
+                        <outlet property="searchResult" destination="0qq-Gg-Fc0" id="dqM-NT-rNH"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <searchDisplayController id="ECB-Vr-9A3">
+                    <connections>
+                        <outlet property="delegate" destination="BYZ-38-t0r" id="sUT-DG-OWX"/>
+                        <outlet property="searchContentsController" destination="BYZ-38-t0r" id="GYp-6z-uks"/>
+                        <outlet property="searchResultsDataSource" destination="BYZ-38-t0r" id="suA-fY-hNZ"/>
+                        <outlet property="searchResultsDelegate" destination="BYZ-38-t0r" id="cWl-iF-9zn"/>
+                    </connections>
+                </searchDisplayController>
             </objects>
             <point key="canvasLocation" x="305" y="355"/>
         </scene>
