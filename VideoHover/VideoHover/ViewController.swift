@@ -89,7 +89,6 @@ class ViewController: UIViewController, VideoHoverDelegate, CHBDelegate {
     //searchbutton implementation to check for the contents
     @IBAction func searchButton(sender: AnyObject) {
         
-        
         let search = searchBar.text
         
         //checking for the command in the search bar and mapping it to appropriate data and cideo frame
@@ -130,16 +129,20 @@ class ViewController: UIViewController, VideoHoverDelegate, CHBDelegate {
         }
         if(search == "Hand"){
             searchResult.text = "No hand ball "
-        
+            
             
         }
-      else
+        else
         {
             //searchResult.text = "Sorry content not available "
         }
         
         
         
+        
+
+    
+               
     }
     
 
