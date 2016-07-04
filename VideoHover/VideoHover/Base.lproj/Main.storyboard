@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15A279b" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -20,10 +20,12 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cFw-uy-lgs" customClass="VideoPlayer" customModule="VideoHover" customModuleProvider="target">
                                 <rect key="frame" x="20" y="20" width="554" height="390"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="v0h-a6-kGn" customClass="VideoHover" customModule="VideoHover" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="554" height="390"/>
+                                    </view>
+                                </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v0h-a6-kGn" customClass="VideoHover" customModule="VideoHover" customModuleProvider="target">
-                                <rect key="frame" x="20" y="20" width="554" height="390"/>
                             </view>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="TuE-WW-ZIw">
                                 <rect key="frame" x="507" y="418" width="51" height="31"/>
@@ -84,7 +86,6 @@
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="v0h-a6-kGn" firstAttribute="bottom" secondItem="cFw-uy-lgs" secondAttribute="bottom" id="0mk-fw-gh5"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="IXr-dI-bSi" secondAttribute="bottom" constant="114" id="3aF-99-Va4"/>
                             <constraint firstItem="IMD-SV-M0S" firstAttribute="centerX" secondItem="TuE-WW-ZIw" secondAttribute="centerX" id="5tt-7O-sFO"/>
                             <constraint firstAttribute="trailingMargin" secondItem="cFw-uy-lgs" secondAttribute="trailing" constant="6" id="6l3-cI-0Sm"/>
@@ -95,15 +96,12 @@
                             <constraint firstItem="o7x-lc-S1k" firstAttribute="top" secondItem="Oo7-xT-x7p" secondAttribute="bottom" constant="8" id="JWi-qh-Lfs"/>
                             <constraint firstAttribute="leadingMargin" secondItem="o7x-lc-S1k" secondAttribute="leading" id="JXJ-Ab-UNn"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Hol-Ae-RCu" secondAttribute="bottom" constant="114" id="MVx-uX-hyz"/>
-                            <constraint firstItem="v0h-a6-kGn" firstAttribute="trailing" secondItem="cFw-uy-lgs" secondAttribute="trailing" id="SLw-Ag-yWG"/>
                             <constraint firstItem="Oo7-xT-x7p" firstAttribute="centerX" secondItem="uay-3g-NPK" secondAttribute="centerX" id="U1C-3Q-aAa"/>
                             <constraint firstItem="Oo7-xT-x7p" firstAttribute="top" secondItem="uay-3g-NPK" secondAttribute="bottom" constant="16" id="ZV2-Ih-m1f"/>
-                            <constraint firstItem="v0h-a6-kGn" firstAttribute="leading" secondItem="cFw-uy-lgs" secondAttribute="leading" id="aU6-FW-IK2"/>
                             <constraint firstAttribute="trailingMargin" secondItem="o7x-lc-S1k" secondAttribute="trailing" id="cjo-DA-lKJ"/>
                             <constraint firstItem="IMD-SV-M0S" firstAttribute="top" secondItem="TuE-WW-ZIw" secondAttribute="bottom" constant="16" id="k8c-EL-Jfo"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Oo7-xT-x7p" secondAttribute="bottom" constant="114" id="kkb-Kj-jTT"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="IMD-SV-M0S" secondAttribute="bottom" constant="114" id="msC-bb-mNv"/>
-                            <constraint firstItem="v0h-a6-kGn" firstAttribute="top" secondItem="cFw-uy-lgs" secondAttribute="top" id="n9j-RH-OXa"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="cFw-uy-lgs" secondAttribute="bottom" constant="190" id="pD7-hj-Oy3"/>
                             <constraint firstAttribute="trailingMargin" secondItem="uay-3g-NPK" secondAttribute="trailing" constant="181" id="q4J-25-Kau"/>
                             <constraint firstItem="IXr-dI-bSi" firstAttribute="leading" secondItem="Hol-Ae-RCu" secondAttribute="trailing" constant="35" id="sEf-ga-LMN"/>

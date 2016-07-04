@@ -14,10 +14,11 @@ class ViewController: UIViewController, VideoHoverDelegate, CHBDelegate {
     
     @IBAction func annotationSwitchChanged(sender: AnyObject) {
         let sw = sender as! UISwitch
-        if sw.on {
+                if sw.on {
             hover?.showOverlays()
         } else {
             hover?.hideOverlays()
+                   
         }
         
     }
@@ -30,6 +31,12 @@ class ViewController: UIViewController, VideoHoverDelegate, CHBDelegate {
     @IBAction func resetVideo(sender: AnyObject) {
         videoPlayer?.player.seekToTime(kCMTimeZero)
     }
+   // @IBOutlet weak var videoLabel: UILabel!
+    
+    //@IBOutlet weak var searchHit: UISearchBar!
+    
+    //@IBAction func searchButton(sender: UIButton) {
+        //print("search button hit")    }
     
     func pauseVideo() {
         videoPlayer!.player.rate = 0.0
